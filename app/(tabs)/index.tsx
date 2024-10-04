@@ -6,6 +6,7 @@ import { Card, Title, Paragraph, useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import Avatar from '../../components/avatar';
 
+
 const TelaHome = () => {
     const router = useRouter();
     const { colors } = useTheme();

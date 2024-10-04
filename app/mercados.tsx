@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList, Alert } from 'react-native';
 import { Appbar, TextInput, Button, Card, Title, IconButton, Dialog, Portal, useTheme, Paragraph  } from 'react-native-paper';
 import { useRouter } from 'expo-router';
-import Avatar from '../components/avatar';
-import { MercadoService, Mercado, MercadoInput } from '../services/mercados';
+import { Avatar, Header } from '@/components';
+import { MercadoService, Mercado, MercadoInput } from '@/services/mercados';
 
 
 
@@ -131,14 +131,7 @@ const TelaMercados = () => {
 
     return (
         <View style={styles.container}>
-            <Appbar.Header>
-                <Appbar.BackAction onPress={() => router.push('/')} />
-                <Appbar.Content title="Mercados" />
-                <Appbar.Action
-                    icon="dots-vertical"
-                    onPress={() => router.push('/settings')}
-                />
-            </Appbar.Header>
+            <Header title="Gerencie os Mercados" showBackAction={true} />
 
             <View style={styles.headerContainer}>
                 <Avatar

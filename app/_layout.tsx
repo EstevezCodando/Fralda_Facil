@@ -6,19 +6,26 @@ import { getTheme } from '@/utils/themeUtils';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AuthProvider, useAuth } from '@/services/AuthContext';
 import * as SplashScreen from 'expo-splash-screen';
-import { useFonts } from 'expo-font';
+import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
 
 
-// Impedir a tela de splash de ocultar automaticamente
-SplashScreen.preventAutoHideAsync();
 
 export default function App() {
     const [loaded, setLoaded] = useState(false);
 
-    // Simular o carregamento de fontes e outros recursos aqui
+    // Carregando as fontes que você precisa
     const [fontsLoaded] = useFonts({
-        SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+        Poppins_400Regular,
+        Poppins_700Bold,
     });
+
+    useEffect(() => {
+
+        async function prepare() {
+            await SplashScreen.preventAutoHideAsync();
+        }
+        prepare();
+    }, []);
 
     useEffect(() => {
         if (fontsLoaded) {
@@ -28,12 +35,12 @@ export default function App() {
     }, [fontsLoaded]);
 
     if (!loaded) {
-        // Mostrar a SplashScreen enquanto as fontes e os recursos estão sendo carregados
         return null;
     }
 
     return <AppRoot />;
 }
+
 
 function AppRoot() {
     return (

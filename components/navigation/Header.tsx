@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { Appbar, Menu, Divider, useTheme, Text } from 'react-native-paper';
 import { useRouter } from 'expo-router';
-import { logoutUsuario } from '../../services/auth';
-import { useUsuario } from '../../hooks/useUsuario';
-import { View } from 'react-native';
+import { logoutUsuario } from '@/services/auth';
+import { View, StyleSheet  } from 'react-native';
 
-const Header = () => {
+interface HeaderProps {
+    title?: string;
+    showBackAction?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ title = '', showBackAction = false }) => {
     const router = useRouter();
-    const { usuario, carregando } = useUsuario();
+
     const { colors } = useTheme();
-    const userName = usuario?.nome || 'Usuário';
 
     const [menuVisible, setMenuVisible] = useState(false);
 
@@ -46,9 +49,12 @@ const Header = () => {
     };
 
     return (
-        <Appbar.Header>
-            <Appbar.Content title={<Text>{`Bem-vindo! ${userName}`}</Text>} />
-            <View>
+        <Appbar.Header style={styles.header}>
+            {showBackAction && (
+                <Appbar.BackAction onPress={() => router.push('/')} />
+            )}
+            <Appbar.Content title={<Text style={styles.title}>{title}</Text>} />
+            <View style={styles.menu}>
                 <Menu
                     visible={menuVisible}
                     onDismiss={fecharMenu}
@@ -71,4 +77,21 @@ const Header = () => {
     );
 };
 
+const styles = StyleSheet.create({
+    header: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    title: {
+        textAlign: 'center',
+        flex: 1,
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 18,
+        color: '#333',
+        paddingVertical: 20,
+    },
+    menu: {
+        justifyContent: 'flex-end',
+    }
+});
 export default Header;

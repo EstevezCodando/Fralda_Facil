@@ -1,23 +1,26 @@
 import { Tabs, Redirect } from 'expo-router';
 import React from 'react';
 import { TabBarIcon, Header } from '@/components';
-import { Provider as PaperProvider } from 'react-native-paper';
+import {Appbar, Provider as PaperProvider, Text} from 'react-native-paper';
 import { useAuth } from '@/services/AuthContext';
 import { getTheme } from '@/utils/themeUtils';
+import { useUsuario } from '@/hooks/useUsuario';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
     const { user, theme } = useAuth();
+    const { usuario, carregando } = useUsuario();
     const systemTheme = useColorScheme();
 
     if (!user) {
         return <Redirect href="/login" />;
     }
-
+    const userName = usuario?.nome || 'Usuário';
     const appliedTheme = getTheme(theme ?? 'auto', systemTheme ?? 'light');
     return (
         <PaperProvider theme={appliedTheme}>
-            <Header />
+            <Header title={`Bem vindo ${userName}`} showBackAction={false} />
+
             <Tabs
                 screenOptions={{
                     tabBarActiveTintColor: appliedTheme.colors.primary,
