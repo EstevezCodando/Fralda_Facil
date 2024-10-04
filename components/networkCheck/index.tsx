@@ -14,7 +14,7 @@ function NetworkChecker({ children }: { children: React.ReactNode }) {
             if (!networkStatus.isConnected) {
                 router.replace('/noInternet'); // Redireciona para a tela noInternet
             } else {
-                router.replace('/home'); // Redireciona para a Home quando a conexão voltar
+                router.replace('/login'); // Redireciona para a Home quando a conexão voltar
             }
         };
 

@@ -23,7 +23,7 @@ export default function NoInternetScreen({ navigation }: Props) {
         <View style={styles.container}>
             <Avatar
                 source={require('../assets/images/baby-sad.png')}
-                size={150}
+                size={400}
                 style={styles.avatar}
             />
             <Text style={styles.text}>A internet já vai voltar</Text>
