@@ -1,4 +1,5 @@
 import { app } from '../config/firebase';
+import { uploadImage } from './firebase/storage';
 import { getDatabase, ref, push, get, set, update, remove } from 'firebase/database';
 
 const database = getDatabase(app);
@@ -6,10 +7,16 @@ const database = getDatabase(app);
 export interface Marca {
     marcaId?: string | null;
     nome: string;
+    imagemUri?: string | null;
 }
 
 export const adicionarMarca = async (marca: Marca): Promise<Marca> => {
     try {
+        if (marca.imagemUri) {
+            const imageUrl = await uploadImage(marca.imagemUri, `marcas/${marca.marcaId}`);
+            marca.imagemUri = imageUrl;
+        }
+
         const novaMarcaRef = push(ref(database, 'marcas'));
         marca.marcaId = novaMarcaRef.key;
         await set(novaMarcaRef, marca);

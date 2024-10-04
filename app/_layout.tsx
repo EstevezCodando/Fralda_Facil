@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, startTransition } from 'react';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { Provider as PaperProvider } from 'react-native-paper';
@@ -13,7 +13,7 @@ import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-font
 export default function App() {
     const [loaded, setLoaded] = useState(false);
 
-    // Carregando as fontes que você precisa
+
     const [fontsLoaded] = useFonts({
         Poppins_400Regular,
         Poppins_700Bold,
@@ -29,8 +29,10 @@ export default function App() {
 
     useEffect(() => {
         if (fontsLoaded) {
-            setLoaded(true);
-            SplashScreen.hideAsync();
+            startTransition(() => {
+                setLoaded(true);
+                SplashScreen.hideAsync();
+            });
         }
     }, [fontsLoaded]);
 

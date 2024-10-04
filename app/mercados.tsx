@@ -139,7 +139,7 @@ const TelaMercados = () => {
                     size={100}
                     style={styles.avatar}
                 />
-                <Title style={styles.title}>Adicionar Mercado</Title>
+                <Title style={styles.title}>Adicione um novo Mercado</Title>
             </View>
 
             <View style={styles.formulario}>
