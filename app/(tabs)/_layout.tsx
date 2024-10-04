@@ -19,7 +19,7 @@ export default function TabLayout() {
     const appliedTheme = getTheme(theme ?? 'auto', systemTheme ?? 'light');
     return (
         <PaperProvider theme={appliedTheme}>
-            <Header title={`Bem vindo ${userName}`} showBackAction={false} />
+
 
             <Tabs
                 screenOptions={{

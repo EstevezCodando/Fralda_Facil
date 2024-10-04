@@ -46,10 +46,10 @@ export default function SettingsScreen() {
                         valueChecked={valueChecked}
                         setValueChecked={setValueChecked}
                         radios={[
-                            { value: 'auto', label: 'Azul Baby ' },
+                            { value: 'auto', label: 'Blue Baby ' },
                             { value: 'light', label: 'Light Baby' },
                             { value: 'dark', label: 'Dark Baby' },
-                            { value: 'pink', label: 'Rosa Baby' },
+                            { value: 'pink', label: 'Pink Baby' },
                         ]}
                     />
                 </RadioGroup>

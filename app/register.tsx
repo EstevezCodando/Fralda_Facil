@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Button, TextInput } from '@/components';
+import {Avatar, Button, TextInput} from '@/components';
 import { validarEmail, validarSenha } from '@/utils/validators';
 import { criarConta } from '@/services/auth';
+import {Title} from "react-native-paper";
 
 const TelaRegistro = () => {
     const router = useRouter();
@@ -52,14 +53,25 @@ const TelaRegistro = () => {
     };
 
     return (
-        <View style={estilos.container}>
+
+        <View style={styles.container}>
+
+            <View style={styles.headerContainer}>
+                <Avatar
+                    source={require('../assets/images/crieconta.png')}
+                    size={100}
+                    style={styles.avatar}
+                />
+                <Title style={styles.title}>Crie sua conta !</Title>
+            </View>
+
             <TextInput
                 label="Nome"
                 value={nome}
                 onChangeText={setNome}
                 error={!!erroNome}
                 errorMessage={erroNome}
-                style={estilos.input}
+                style={styles.input}
             />
             <TextInput
                 label="Email"
@@ -69,7 +81,7 @@ const TelaRegistro = () => {
                 errorMessage={erroEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                style={estilos.input}
+                style={styles.input}
             />
             <TextInput
                 label="Senha"
@@ -78,19 +90,19 @@ const TelaRegistro = () => {
                 error={!!erroSenha}
                 errorMessage={erroSenha}
                 secureTextEntry
-                style={estilos.input}
+                style={styles.input}
             />
-            <Button onPress={handleRegistro} loading={carregando} style={estilos.botao}>
+            <Button onPress={handleRegistro} loading={carregando} style={styles.botao}>
                 Criar Conta
             </Button>
-            <Button onPress={() => router.back()} mode="text" style={estilos.link}>
+            <Button onPress={() => router.back()} mode="text" style={styles.link}>
                 Voltar
             </Button>
         </View>
     );
 };
 
-const estilos = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
@@ -105,6 +117,17 @@ const estilos = StyleSheet.create({
     },
     link: {
         marginTop: 5,
+    },
+    headerContainer: {
+        alignItems: 'center',
+        marginVertical: 20,
+    },
+    avatar: {
+        backgroundColor: 'transparent',
+    },
+    title: {
+        marginTop: 10,
+        fontSize: 24,
     },
 });
 

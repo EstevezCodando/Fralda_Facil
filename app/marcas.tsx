@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList, Alert, Image, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, FlatList, Alert, Image, TouchableOpacity, Text, ScrollView } from 'react-native';
 import { TextInput, Button, Card, Title, IconButton, Dialog, Portal, Paragraph } from 'react-native-paper';
 import { Avatar, Header } from '@/components';
 import { listarMarcas, adicionarMarca, atualizarMarca, removerMarca, Marca } from '@/services/marcas';
 import ImagePickerComponent from '@/components/ImagePickerComponent';
+
 
 const TelaMarcas = () => {
     const [nome, setNome] = useState('');
@@ -132,6 +133,7 @@ const TelaMarcas = () => {
     );
 
     return (
+        <ScrollView>
         <View style={styles.container}>
             <Header title="Gerencie as Marcas" showBackAction={true} />
 
@@ -153,11 +155,9 @@ const TelaMarcas = () => {
                 />
                 <ImagePickerComponent onImageSelected={setImagemUri} />
                 {imagemUri ? <Image source={{ uri: imagemUri }} style={styles.imagemPreview} /> : null}
-                <TouchableOpacity onPress={handleAdicionarMarca} style={styles.botao}>
-                    <Button mode="contained"  style={styles.botao}>
+                    <Button mode="contained"  onPress={handleAdicionarMarca} style={styles.botao}>
                         Adicionar
                     </Button>
-                </TouchableOpacity>
             </View>
 
             <TextInput
@@ -206,6 +206,7 @@ const TelaMarcas = () => {
             </Portal>
 
         </View>
+        </ScrollView>
     );
 };
 
@@ -264,15 +265,12 @@ const styles = StyleSheet.create({
     marcaNome: {
         fontSize: 18,
         fontWeight: 'bold',
-        textDecorationLine: 'underline', // Nome sublinhado
+        textDecorationLine: 'underline',
     },
     imagemPreview: {
-        width: 100,
-        height: 100,
-        marginVertical: 10,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 10,
+        width: 200,
+        height: 200,
+        marginTop: 10,
     },
 });
 

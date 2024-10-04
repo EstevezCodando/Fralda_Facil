@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jeanalvarez.Fralda_final"
     },
     "web": {
       "bundler": "metro",
@@ -29,6 +30,11 @@
     "plugins": [
       "expo-router",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "206d9356-25d8-4a57-b12c-60025efc5ecd"
+      }
+    }
   }
 }

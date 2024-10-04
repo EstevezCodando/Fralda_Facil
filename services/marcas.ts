@@ -1,5 +1,5 @@
 import { app } from '../config/firebase';
-import { uploadImage } from './firebase/storage';
+import { uploadImageAsync } from './firebase/storage';
 import { getDatabase, ref, push, get, set, update, remove } from 'firebase/database';
 
 const database = getDatabase(app);
@@ -13,7 +13,7 @@ export interface Marca {
 export const adicionarMarca = async (marca: Marca): Promise<Marca> => {
     try {
         if (marca.imagemUri) {
-            const imageUrl = await uploadImage(marca.imagemUri, `marcas/${marca.marcaId}`);
+            const imageUrl = await uploadImageAsync(marca.imagemUri, `marcas/${marca.marcaId}`);
             marca.imagemUri = imageUrl;
         }
 

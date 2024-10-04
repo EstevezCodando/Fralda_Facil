@@ -1,5 +1,5 @@
 import { app } from '../config/firebase';
-import { getDatabase, ref, set, get } from 'firebase/database';import { getAuth } from 'firebase/auth';
+import { getDatabase, ref, set, get, update } from 'firebase/database';import { getAuth } from 'firebase/auth';
 const database = getDatabase(app);
 const auth = getAuth(app);
 
@@ -8,6 +8,7 @@ export interface Usuario {
     email: string;
     nome: string;
     data_criacao: string;
+    imagemPerfil?: string;
 }
 
 export const criarUsuario = async (nome: string) => {
@@ -20,6 +21,7 @@ export const criarUsuario = async (nome: string) => {
                 email: usuarioAtual.email || '',
                 nome,
                 data_criacao: new Date().toISOString(),
+                imagemPerfil: '', // Valor padrão vazio
             };
             await set(usuarioRef, usuario);
         } else {
@@ -41,6 +43,20 @@ export const obterUsuario = async (): Promise<Usuario> => {
             } else {
                 throw new Error('Usuário não encontrado no banco de dados.');
             }
+        } else {
+            throw new Error('Usuário não autenticado.');
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const editarUsuario = async (novoNome: string) => {
+    try {
+        const usuarioAtual = auth.currentUser;
+        if (usuarioAtual) {
+            const usuarioRef = ref(database, `usuarios/${usuarioAtual.uid}`);
+            await update(usuarioRef, { nome: novoNome });
         } else {
             throw new Error('Usuário não autenticado.');
         }

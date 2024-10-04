@@ -1,6 +1,7 @@
 export { default as Avatar } from './avatar';
 export { default as Button } from './button';
 export { default as Grid } from './grid';
+export { default as Fab } from './fab';
 export { default as CustomTextInput } from './textinput';
 export { default as Menu } from './navigation/menu';
 export { default as AppBar } from './navigation/AppBar';
@@ -9,3 +10,7 @@ export { default as Header } from './navigation/Header';
 export { default as Radio } from './radio';
 export { default as RadioGroup } from './radio/radiogroup';
 export { default as TextInput } from './textinput';
+export { default as Dialog } from './dialog';
+export { default as Modal } from './modal';
+export { default as Camera } from './camera';
+export { default as ImagePickerComponent } from './ImagePickerComponent';

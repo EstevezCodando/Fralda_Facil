@@ -5,14 +5,23 @@ import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Card, Title, Paragraph, useTheme } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import Avatar from '../../components/avatar';
+import { useUsuario } from '@/hooks/useUsuario';
+
+import {Header} from "@/components";
+import {useAuth} from "@/services/AuthContext";
 
 
 const TelaHome = () => {
     const router = useRouter();
     const { colors } = useTheme();
+    const { user, theme } = useAuth();
+    const { usuario, carregando } = useUsuario();
+    const userName = usuario?.nome || 'Usuário';
 
     return (
+
         <View style={[estilos.container, { backgroundColor: colors.background }]}>
+            <Header title={`Bem vindo ${userName}`} showBackAction={false} />
             <ScrollView contentContainerStyle={estilos.scrollContainer}>
 
                 <Card style={estilos.cardDescricao}>
