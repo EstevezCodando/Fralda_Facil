@@ -14,3 +14,4 @@ export { default as Dialog } from './dialog';
 export { default as Modal } from './modal';
 export { default as Camera } from './camera';
 export { default as ImagePickerComponent } from './ImagePickerComponent';
+export { default as NetworkChecker } from './networkCheck';

@@ -1,12 +1,14 @@
 import React, { useEffect, useState, startTransition } from 'react';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider,  } from 'react-native-paper';
 import { getTheme } from '@/utils/themeUtils';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AuthProvider, useAuth } from '@/services/AuthContext';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
+import { NetworkChecker } from '@/components';
+
 
 
 
@@ -44,13 +46,26 @@ export default function App() {
 }
 
 
+function NoInternetScreen() {
+    return (
+        <PaperProvider>
+            <ThemeProvider value={DefaultTheme}>
+                <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="noInternet" options={{ title: 'Sem Conexão' }} />
+                </Stack>
+            </ThemeProvider>
+        </PaperProvider>
+    );
+}
+
 function AppRoot() {
     return (
         <AuthProvider>
-
-            <SignedIn>
-                <RootLayout />
-            </SignedIn>
+            <NetworkChecker>
+                <SignedIn>
+                    <RootLayout />
+                </SignedIn>
+            </NetworkChecker>
         </AuthProvider>
     );
 }
